@@ -2,6 +2,8 @@ package com.model;
 
 
 import com.input.create.UserFormCreate;
+import com.input.update.UserFormUpdate;
+
 import java.io.Serializable;
 
 
@@ -9,9 +11,11 @@ public class User implements Serializable {
 
     private long id;
     private String userName;
+    private String name;
+    private String avatar;
     private String email;
     private String password;
-    private Double balance;
+    private Double balance = 0.0;
 
     public User(long id, String userName, String email){
         this.id = id;
@@ -24,9 +28,16 @@ public class User implements Serializable {
 
 	public User(UserFormCreate userFormCreate){
     	this.userName = userFormCreate.getUserName();
+    	this.name = userFormCreate.getName();
     	this.email = userFormCreate.getEmail();
     	this.password = userFormCreate.getPassword();
 	}
+
+    public User(UserFormUpdate userFormUpdate){
+        this.id = userFormUpdate.getId();
+        this.name = userFormUpdate.getName();
+        this.password = userFormUpdate.getPassword();
+    }
 
     public long getId() {
         return id;
@@ -66,5 +77,21 @@ public class User implements Serializable {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

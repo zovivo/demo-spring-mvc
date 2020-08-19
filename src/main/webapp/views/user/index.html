@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="views/layout/base-layout">
+      layout:decorate="../layout/base-layout">
 
 <div layout:fragment="body">
     <div class="container" style="margin-top: 50px">
@@ -17,18 +17,18 @@
         <div class="row md-col-8">
             <h2 th:text="#{search}">Search</h2>
             <form th:action="@{/search} " th:object="${userSearch}"
-                  cssClass="form-horizontal">
+                  class="form-horizontal">
 
                 <table>
                     <tr>
-                        <th th:text="#{name}">Name</th>
+                        <th th:text="#{name}">Name&nbsp;&nbsp;</th>
                         <td><input type="text" th:field="*{userName}" path="userName"
-                                   cssClass="form-control"/>
-                        <th style="padding-left: 28px;" th:text="#{email}">Email</th>
+                                   class="form-control"/>
+                        <th style="padding-left: 28px;" th:text="#{email}">Email&nbsp;&nbsp;</th>
                         <td>
-                            <form:input path="email" cssClass="form-control"/>
+                            <form:input path="email" class="form-control"/>
                             <form:errors
-                                    path="email" cssClass="error"/>
+                                    path="email" class="error"/>
                         </td>
                         <td style="padding-left: 28px;">
                             <button type="submit" th:text="#{search}">Search</button>
@@ -48,6 +48,7 @@
                         <thead class="bg-primary">
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col" th:text="#{fullName}">Full Name</th>
                             <th scope="col" th:text="#{email}">Email</th>
                             <th scope="col" th:text="#{username}">Username</th>
                             <th scope="col" th:text="#{action}">Action</th>
@@ -58,6 +59,7 @@
                         <th:block th:each="user,iter : ${users}">
                             <tr th:style="${iter.odd}? 'background-color: #ccc;'">
                                 <th scope="row" th:text="${iter.index + 1}"></th>
+                                <td th:text="${user.name}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.userName}"></td>
                                 <td>

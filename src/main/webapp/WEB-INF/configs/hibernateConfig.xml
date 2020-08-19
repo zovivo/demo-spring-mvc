@@ -43,7 +43,7 @@
 		<!-- Load mapping of model and table -->
 		<property name="mappingResources">
 			<list>
-				<value>User.hbm.xml</value>
+				<value>mapping/user.hbm.xml</value>
 			</list>
 		</property>
 		<!-- load package
