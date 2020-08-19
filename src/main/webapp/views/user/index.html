@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="views/layout/base-layout">
+	layout:decorate="../layout/base-layout">
 
 <div layout:fragment="body">
 	<div class="container" style="margin-top: 50px">
@@ -15,18 +15,18 @@
 			<strong><span th:text="${msg}"></span></strong>
 		</div>
 		<div class="row md-col-8">
-			<h2>Search From</h2>
+			<h2>Search</h2>
 			<form th:action="@{/search} " th:object="${userSearch}"
-				cssClass="form-horizontal">
+				class="form-horizontal">
 
 				<table>
 					<tr>
 						<th>Name&nbsp;&nbsp;</th>
 						<td><input type="text" th:field="*{userName}" path="userName"
-							cssClass="form-control" />
+							class="form-control" />
 						<th style="padding-left: 28px;">Email&nbsp;&nbsp;</th>
-						<td><form:input path="email" cssClass="form-control" /> <form:errors
-								path="email" cssClass="error" /></td>
+						<td><form:input path="email" class="form-control" /> <form:errors
+								path="email" class="error" /></td>
 						<td style="padding-left: 28px;"><button type="submit">Search</button></td>
 					</tr>
 				</table>

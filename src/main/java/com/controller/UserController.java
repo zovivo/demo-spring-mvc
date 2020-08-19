@@ -7,17 +7,16 @@ import com.model.User;
 import com.service.impl.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -30,7 +29,7 @@ public class UserController {
     @RequestMapping(value = {"/","/list"})
     public ModelAndView index() {
         logger.info("home page");
-        ModelAndView model = new ModelAndView("views/user/index");
+        ModelAndView model = new ModelAndView("index");
         model.addObject("userSearch", new User());
         model.addObject("users", userService.getAll());
         return model;
@@ -45,7 +44,7 @@ public class UserController {
             model.addAttribute("msg", "user not found");
         }
         model.addAttribute("user", user);
-        return "views/user/user";
+        return "user";
     }
 
     @RequestMapping(value = "/user/{id}/delete")
@@ -68,7 +67,7 @@ public class UserController {
         UserFormCreate userFormCreater = new UserFormCreate();
         logger.info("model: "+model.toString());
         model.addAttribute("userFormCreate", userFormCreater);
-        return "views/user/user-form-create";
+        return "user-add";
 
     }
 
@@ -78,7 +77,7 @@ public class UserController {
         UserFormUpdate userFormUpdate = new UserFormUpdate(userService.findOne(id));
         model.addAttribute("userFormUpdate", userFormUpdate);
 
-        return "views/user/user-form-update";
+        return "user-edit";
 
     }
 
@@ -90,7 +89,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/create-user", method = RequestMethod.POST)
-    public String create(@ModelAttribute UserFormCreate userFormCreate) throws CustomException {
+    public String create(@ModelAttribute("userFormCreate") @Valid UserFormCreate userFormCreate, BindingResult result) throws CustomException {
+        if (result.hasErrors()) {
+            return "user-form-create";
+        }
         logger.info("create user");
         logger.info("user: "+userFormCreate.toString());
         User user = userService.create(userFormCreate);

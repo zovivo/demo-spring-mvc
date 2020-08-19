@@ -1,10 +1,13 @@
 package com.input.create;
 
+import com.validator.Password;
+
 public class UserFormCreate {
 
     private String userName;
     private String email;
     private String name;
+    @Password
     private String password;
     private String confirmPassword;
 

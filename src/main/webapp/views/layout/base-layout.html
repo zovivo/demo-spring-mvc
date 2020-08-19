@@ -5,17 +5,22 @@
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+		<style>
+			.error {
+				color: red;
+			}
+		</style>
 	</head>
 	
 	<body>
 		<nav class="navbar navbar-default">
-			<div th:replace="views/layout/header :: header"></div>
+			<div th:replace="../layout/header :: header"></div>
 		</nav>
 	
 		<div layout:fragment="body"></div>
 	
 		<footer>
-			<div th:replace="views/layout/footer :: footer"></div>
+			<div th:replace="../layout/footer :: footer"></div>
 		</footer>
 	
 	</body>
