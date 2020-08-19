@@ -5,3 +5,11 @@ target/
 .idea/
 *.iml
 *.iws
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Gitignore
+.gitignore
