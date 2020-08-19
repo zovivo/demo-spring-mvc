@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.exception.CustomException;
 import com.input.create.UserFormCreate;
 import com.input.update.UserFormUpdate;
 import com.model.User;
@@ -37,7 +38,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model model) {
-        logger.info("detail student");
+        logger.info("detail user");
         User user = userService.findOne(id);
         if (user == null) {
             model.addAttribute("css", "danger");
@@ -48,7 +49,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{id}/delete")
-    public String deleteStudent(@PathVariable("id") Long id, final RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable("id") Long id, final RedirectAttributes redirectAttributes) {
         logger.info("delete user");
         if (userService.delete(id) > 0) {
             redirectAttributes.addFlashAttribute("css", "success");
@@ -63,7 +64,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/add", method = RequestMethod.GET)
-    public String newStudent(Model model) {
+    public String add(Model model) {
         UserFormCreate userFormCreater = new UserFormCreate();
         logger.info("model: "+model.toString());
         model.addAttribute("userFormCreate", userFormCreater);
@@ -72,26 +73,24 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{id}/edit", method = RequestMethod.GET)
-    public String editStudent(@PathVariable("id") Long id, Model model) {
+    public String edit(@PathVariable("id") Long id, Model model) {
 
-        User user = userService.findOne(id);
-        model.addAttribute("userFormUpdate", user);
+        UserFormUpdate userFormUpdate = new UserFormUpdate(userService.findOne(id));
+        model.addAttribute("userFormUpdate", userFormUpdate);
 
         return "views/user/user-form-update";
 
     }
 
     @RequestMapping(value = "/update-user", method = RequestMethod.POST)
-    public String updateStudent(@ModelAttribute UserFormUpdate userFormUpdate) {
-        logger.info("update user");
-        User user = new User(userFormUpdate.getId(),userFormUpdate.getUserName(),userFormUpdate.getEmail());
-        userService.update(user);
+    public String update(@ModelAttribute UserFormUpdate userFormUpdate) {
+        userService.update(userFormUpdate);
         return "redirect:/";
 
     }
 
     @RequestMapping(value = "/create-user", method = RequestMethod.POST)
-    public String createStudent(@ModelAttribute UserFormCreate userFormCreate) {
+    public String create(@ModelAttribute UserFormCreate userFormCreate) throws CustomException {
         logger.info("create user");
         logger.info("user: "+userFormCreate.toString());
         User user = userService.create(userFormCreate);

@@ -1,9 +1,12 @@
 package com.input.update;
 
+import com.model.User;
+
 public class UserFormUpdate {
 
     private Long id;
     private String userName;
+    private String name;
     private String email;
     private String password;
 
@@ -37,5 +40,23 @@ public class UserFormUpdate {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public UserFormUpdate(){
+    }
+
+    public UserFormUpdate(User user){
+        this.id = user.getId();
+        this.userName = user.getUserName();
+        this.name = user.getName();
+        this.email = user.getEmail();
     }
 }

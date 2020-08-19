@@ -4,6 +4,7 @@ public class UserFormCreate {
 
     private String userName;
     private String email;
+    private String name;
     private String password;
     private String confirmPassword;
 
@@ -37,5 +38,13 @@ public class UserFormCreate {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,11 +1,13 @@
 package com.service.impl;
 
+import com.enu.ErrorCode;
+import com.exception.CustomException;
 import com.input.create.UserFormCreate;
+import com.input.update.UserFormUpdate;
 import com.model.User;
 import com.repository.impl.UserRepository;
 import com.service.BaseService;
 import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +35,24 @@ public class UserService extends BaseService<UserRepository, User, Long> {
         return users;
     }
 
-    public User create(UserFormCreate userFormCreate) {
-        User user = new User(userFormCreate);
+    public User create(UserFormCreate userFormCreate) throws CustomException {
+        User user = null;
+        user = userRepository.findByEmail(userFormCreate.getEmail());
+        if (user != null)
+            throw new CustomException(ErrorCode.EMAIL_EXISTED);
+        user = userRepository.findByUserName(userFormCreate.getUserName());
+        if (user != null)
+            throw new CustomException(ErrorCode.USERNAME_EXISTED);
+        user = new User(userFormCreate);
         user = userRepository.insert(user);
+        return user;
+    }
+
+    public User update(UserFormUpdate userFormUpdate){
+        User user = userRepository.findOne(userFormUpdate.getId());
+        user.setName(userFormUpdate.getName());
+        user.setPassword(userFormUpdate.getPassword());
+        user = userRepository.update(user);
         return user;
     }
 
