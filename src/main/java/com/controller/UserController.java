@@ -2,6 +2,7 @@ package com.controller;
 
 import com.exception.CustomException;
 import com.input.create.UserFormCreate;
+import com.input.login.UserFormLogin;
 import com.input.update.UserFormUpdate;
 import com.model.User;
 import com.service.impl.UserService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.validation.Valid;
 
 @Controller
@@ -26,7 +28,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/","/list"})
+    @RequestMapping(value = {"/", "/list", "/index"})
     public ModelAndView index() {
         logger.info("home page");
         ModelAndView model = new ModelAndView("index");
@@ -57,46 +59,56 @@ public class UserController {
             redirectAttributes.addFlashAttribute("css", "error");
             redirectAttributes.addFlashAttribute("msg", "Delete user fails!!!!");
         }
-
         return "redirect:/";
-
     }
 
     @RequestMapping(value = "/user/add", method = RequestMethod.GET)
     public String add(Model model) {
-        UserFormCreate userFormCreater = new UserFormCreate();
-        logger.info("model: "+model.toString());
-        model.addAttribute("userFormCreate", userFormCreater);
+        UserFormCreate userFormCreate = new UserFormCreate();
+        logger.info("model: " + model.toString());
+        model.addAttribute("userFormCreate", userFormCreate);
         return "user-add";
-
     }
 
     @RequestMapping(value = "/user/{id}/edit", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Long id, Model model) {
-
         UserFormUpdate userFormUpdate = new UserFormUpdate(userService.findOne(id));
         model.addAttribute("userFormUpdate", userFormUpdate);
-
         return "user-edit";
-
     }
 
     @RequestMapping(value = "/update-user", method = RequestMethod.POST)
     public String update(@ModelAttribute UserFormUpdate userFormUpdate) {
         userService.update(userFormUpdate);
         return "redirect:/";
-
     }
 
     @RequestMapping(value = "/create-user", method = RequestMethod.POST)
     public String create(@ModelAttribute("userFormCreate") @Valid UserFormCreate userFormCreate, BindingResult result) throws CustomException {
         if (result.hasErrors()) {
-            return "user-form-create";
+            return "user-add";
         }
         logger.info("create user");
-        logger.info("user: "+userFormCreate.toString());
+        logger.info("user: " + userFormCreate.toString());
         User user = userService.create(userFormCreate);
         return "redirect:/";
+    }
+
+    // Login form
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginForm(Model model) {
+        UserFormLogin userFormLogin = new UserFormLogin();
+        model.addAttribute("userFormLogin", userFormLogin);
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@ModelAttribute("userFormLogin") UserFormLogin userFormLogin, Model model) {
+        User user = userService.login(userFormLogin);
+        if (user != null)
+            return "redirect:/";
+        else
+            return "login";
     }
 
 }

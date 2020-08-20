@@ -3,11 +3,13 @@ package com.service.impl;
 import com.enu.ErrorCode;
 import com.exception.CustomException;
 import com.input.create.UserFormCreate;
+import com.input.login.UserFormLogin;
 import com.input.update.UserFormUpdate;
 import com.model.User;
 import com.repository.impl.UserRepository;
 import com.service.BaseService;
 import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class UserService extends BaseService<UserRepository, User, Long> {
         return user;
     }
 
-    public User update(UserFormUpdate userFormUpdate){
+    public User update(UserFormUpdate userFormUpdate) {
         User user = userRepository.findOne(userFormUpdate.getId());
         user.setName(userFormUpdate.getName());
         user.setPassword(userFormUpdate.getPassword());
@@ -56,4 +58,20 @@ public class UserService extends BaseService<UserRepository, User, Long> {
         return user;
     }
 
+    public User login(UserFormLogin userFormLogin) {
+        String input = userFormLogin.getUserName();
+        User user;
+        if (input.contains("@"))
+            user = userRepository.findByEmail(input);
+        else
+            user = userRepository.findByUserName(input);
+        if (user == null)
+            return null;
+        else {
+            String password = user.getPassword();
+            if (userFormLogin.getPassword().equals(password))
+                return user;
+            return null;
+        }
+    }
 }

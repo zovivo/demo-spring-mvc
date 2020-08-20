@@ -48,9 +48,9 @@
                         <thead class="bg-primary">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col" th:text="#{fullName}">Full Name</th>
+                            <th scope="col" th:text="#{name}">Name</th>
                             <th scope="col" th:text="#{email}">Email</th>
-                            <th scope="col" th:text="#{username}">Username</th>
+                            <th scope="col" th:text="#{userName}">Username</th>
                             <th scope="col" th:text="#{action}">Action</th>
                             <th></th>
                         </tr>
@@ -64,11 +64,11 @@
                                 <td th:text="${user.userName}"></td>
                                 <td>
                                     <a class="btn btn-primary" th:text="#{detail}"
-                                       th:href="@{'/user/' + ${user.id}}"> Detail</a>
+                                       th:href="@{'/user/' + ${user.id}}">Detail</a>
                                     <a class="btn btn-warning" th:text="#{edit}"
-                                       th:href="@{'/user/' + ${user.id} + '/edit'}"> Edit</a>
+                                       th:href="@{'/user/' + ${user.id} + '/edit'}">Edit</a>
                                     <a class="btn btn-danger" th:method="delete" th:text="#{delete}"
-                                       th:href="@{'/user/' + ${user.id} + '/delete'} "> Delete</a>
+                                       th:href="@{'/user/' + ${user.id} + '/delete'} ">Delete</a>
                                 </td>
                             </tr>
                         </th:block>
