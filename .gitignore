@@ -7,7 +7,7 @@ target/
 *.iws
 
 # Datasource Config
-src/main/resources/datasources.properties
+#src/main/resources/datasources.properties
 
 # Eclipse
 .classpath
