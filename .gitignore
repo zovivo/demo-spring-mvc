@@ -6,6 +6,9 @@ target/
 *.iml
 *.iws
 
+# Datasource Config
+src/main/resources/datasources.properties
+
 # Eclipse
 .classpath
 .project
