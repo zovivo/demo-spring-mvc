@@ -4,6 +4,9 @@
 	layout:decorate="views/layout/base-layout">
 
 <div layout:fragment="body">
+	Ngôn ngữ : <a href="?language=en">English</a>| <a
+		href="?language=vi_VN">Viet Nam</a>|
+		<p th:text="#{hello}"></p><br/>
 	<div class="container" style="margin-top: 50px">
 		<div th:if="${msg != null}" class="alert alert-dismissible "
 			th:class="${css == 'error' ? 'alert-error' : 'alert-success'}"
@@ -60,11 +63,9 @@
 									<td><a class="btn btn-primary"
 										th:href="@{'/user/' + ${user.id}}"> Detail</a> <a
 										class="btn btn-warning"
-										th:href="@{'/user/' + ${user.id} + '/edit'}"> Edit</a>
-
-										<a class="btn btn-danger" th:method="delete"
-										th:href="@{'/user/' + ${user.id} + '/delete'} ">
-											Delete</a></td>
+										th:href="@{'/user/' + ${user.id} + '/edit'}"> Edit</a> <a
+										class="btn btn-danger" th:method="delete"
+										th:href="@{'/user/' + ${user.id} + '/delete'} "> Delete</a></td>
 								</tr>
 							</th:block>
 						</tbody>

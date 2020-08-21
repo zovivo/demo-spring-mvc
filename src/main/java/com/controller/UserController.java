@@ -30,7 +30,8 @@ public class UserController {
     @RequestMapping(value = {"/","/list"})
     public ModelAndView index() {
         logger.info("home page");
-        ModelAndView model = new ModelAndView("views/user/index");
+//        ModelAndView model = new ModelAndView("views/user/index");
+        ModelAndView model = new ModelAndView("views/pages/home");
         model.addObject("userSearch", new User());
         model.addObject("users", userService.getAll());
         return model;

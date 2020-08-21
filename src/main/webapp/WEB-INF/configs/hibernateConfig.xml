@@ -1,5 +1,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -11,7 +12,8 @@
 	<tx:annotation-driven proxy-target-class="true"
 		transaction-manager="transactionManager" />
 
-	<context:property-placeholder location="classpath:datasources.properties" />
+	<context:property-placeholder
+		location="classpath:datasources.properties" />
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -46,9 +48,8 @@
 				<value>mapping/user.hbm.xml</value>
 			</list>
 		</property>
-		<!-- load package
-		<property name="packagesToScan" value="app.model.hbm" />
-		 -->
+		<!-- load package <property name="packagesToScan" value="app.model.hbm" 
+			/> -->
 	</bean>
 
 

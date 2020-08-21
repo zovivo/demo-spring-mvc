@@ -2,21 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="views/layout/base-layout">
-	
+
 <div layout:fragment="body">
 	<div class="container" style="margin: 0 auto;">
 
 		<br />
-		
-		<div class="col-md-6"  style="margin: 0 auto;">
 
-			<form action="#" th:action="@{/create-user}" class="form-horizontal" method="post"
-				th:object="${userFormCreate}">
+		<div class="col-md-6" style="margin: 0 auto;">
+
+			<form action="#" th:action="@{/create-user}" class="form-horizontal"
+				method="post" th:object="${userFormCreate}">
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label">User name</label>
 					<div class="col-sm-10">
-						<input type="text" th:field="*{userName}" class="form-control"placeholder="Name" />
+						<input type="text" th:field="*{userName}" class="form-control"
+							placeholder="Name" />
 						<li th:errors="*{userName}" />
 					</div>
 				</div>
@@ -24,7 +25,8 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Email</label>
 					<div class="col-sm-10">
-						<input type="text" th:field="*{email}" class="form-control"placeholder="Email" />
+						<input type="text" th:field="*{email}" class="form-control"
+							placeholder="Email" />
 						<li th:errors="*{email}" />
 					</div>
 				</div>
@@ -32,7 +34,8 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Full name</label>
 					<div class="col-sm-10">
-						<input type="text" th:field="*{name}" class="form-control"placeholder="Full name" />
+						<input type="text" th:field="*{name}" class="form-control"
+							placeholder="Full name" />
 						<li th:errors="*{name}" />
 					</div>
 				</div>
@@ -40,14 +43,16 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Password</label>
 					<div class="col-sm-10">
-						<input type="password" th:field="*{password}" class="form-control"placeholder="Password" />
+						<input type="password" th:field="*{password}" class="form-control"
+							placeholder="Password" />
 						<li th:errors="*{password}" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Confirm Password</label>
 					<div class="col-sm-10">
-						<input type="password" th:field="*{confirmPassword}" class="form-control"placeholder="Confirm Password" />
+						<input type="password" th:field="*{confirmPassword}"
+							class="form-control" placeholder="Confirm Password" />
 						<li th:errors="*{confirmPassword}" />
 					</div>
 				</div>
