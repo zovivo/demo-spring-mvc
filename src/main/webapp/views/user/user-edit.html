@@ -17,6 +17,7 @@
                     <label class="col-sm-5 control-label" th:text="#{name}">Name</label>
                     <div class="col-sm-10">
                         <input type="text" th:field="*{name}" class="form-control" th:placeholder="#{name}"/>
+                        <li th:errors="*{name}" class="error"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -24,11 +25,12 @@
                     <div class="col-sm-10">
                         <input type="password" th:field="*{password}" class="form-control"
                                th:placeholder="#{password}"/>
+                        <li th:errors="*{password}" class="error"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2">
-                        <button type="submit" th:text="#{edit}">Edit</button>
+                        <button type="submit" th:text="#{save}">Save</button>
                     </div>
                 </div>
             </form>

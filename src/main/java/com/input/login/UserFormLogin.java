@@ -1,12 +1,9 @@
 package com.input.login;
 
-import com.validator.Password;
-
 public class UserFormLogin {
 
     private String userName;
     private String email;
-    @Password
     private String password;
 
     public String getUserName() {

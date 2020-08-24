@@ -1,13 +1,16 @@
 package com.input.update;
 
 import com.model.User;
+import com.validator.Password;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class UserFormUpdate {
 
     private Long id;
     private String userName;
-    private String name;
     private String email;
+    private String name;
+    @Password
     private String password;
 
     public Long getId() {
