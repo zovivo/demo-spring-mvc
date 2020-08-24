@@ -18,19 +18,17 @@
             <h2 th:text="#{search}">Search &nbsp;&nbsp;</h2>
             <div>
             </div>
-            <form th:action="@{/search} " th:object="${userSearch}"
+            <form th:action="@{/user/search} " th:object="${userSearch}"
                   class="form-horizontal">
 
                 <table>
                     <tr>
-                        <th style="padding: 0 10px;" th:text="#{name}">Name  &nbsp;&nbsp;</th>
-                        <td><input type="text" th:field="*{userName}" path="userName"
-                                   class="form-control"/>
-                                   </td>
+                        <th style="padding: 0 10px;" th:text="#{name}">User Name  &nbsp;&nbsp;</th>
+                        <td><input type="text" th:field="*{userName}" path="userName" class="form-control"/>
+                        </td>
                         <th style="padding: 0 10px;" th:text="#{email}">Email  &nbsp;&nbsp;</th>
                         <td>
-                            <input type="text" path="email" class="form-control"/>
-                            <li th:errors="*{email}" class="error"/>
+                            <input type="text" th:field="*{email}" path="email" class="form-control"/>
                         </td>
                         <td style="padding-left: 28px;">
                             <button type="submit" th:text="#{search}" class="btn btn-primary">Search</button>

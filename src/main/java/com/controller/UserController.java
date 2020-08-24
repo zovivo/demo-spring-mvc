@@ -31,10 +31,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/", "/list"})
-    public ModelAndView index() {
+    @RequestMapping(value = {"","/", "/list"})
+    public ModelAndView list() {
         logger.info("list user page");
-        ModelAndView model = new ModelAndView("index");
+        ModelAndView model = new ModelAndView("list");
         model.addObject("userSearch", new UserSearch());
         model.addObject("users", userService.getAll());
         return model;
@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "/search")
     public ModelAndView search(@ModelAttribute UserSearch userSearch) {
         logger.info("list user page with search");
-        ModelAndView model = new ModelAndView("index");
+        ModelAndView model = new ModelAndView("list");
         List<User> users = userService.search(userSearch);
         model.addObject("users", users);
         return model;
@@ -71,7 +71,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("css", "error");
             redirectAttributes.addFlashAttribute("msg", "Delete user fails!!!!");
         }
-        return "redirect:/";
+        return "redirect:/user/list";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -92,7 +92,7 @@ public class UserController {
     @RequestMapping(value = "/update-user", method = RequestMethod.POST)
     public String update(@ModelAttribute UserFormUpdate userFormUpdate) {
         userService.update(userFormUpdate);
-        return "redirect:/";
+        return "redirect:/user/list";
     }
 
     @RequestMapping(value = "/create-user", method = RequestMethod.POST)
@@ -103,7 +103,7 @@ public class UserController {
         logger.info("create user");
         logger.info("user: " + userFormCreate.toString());
         User user = userService.create(userFormCreate);
-        return "redirect:/";
+        return "redirect:/user/list";
     }
 
     // Login form
@@ -118,7 +118,7 @@ public class UserController {
     public String login(@ModelAttribute("userFormLogin") UserFormLogin userFormLogin, Model model) {
         User user = userService.login(userFormLogin);
         if (user != null)
-            return "redirect:/";
+            return "redirect:/user/list";
         else
             return "login";
     }

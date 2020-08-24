@@ -90,7 +90,7 @@ public class UserService extends BaseService<UserRepository, User, Long> {
         if (!userSearch.getEmail().isEmpty())
             params.put("email",userSearch.getEmail());
         if (!userSearch.getUserName().isEmpty())
-            params.put("email",userSearch.getUserName());
+            params.put("userName",userSearch.getUserName());
         return params;
     }
 
