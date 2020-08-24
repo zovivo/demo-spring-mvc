@@ -4,13 +4,15 @@ import com.enu.ErrorCode;
 import com.exception.CustomException;
 import com.input.create.UserFormCreate;
 import com.input.login.UserFormLogin;
+import com.input.search.UserSearch;
 import com.input.update.UserFormUpdate;
 import com.model.User;
 import com.repository.impl.UserRepository;
 import com.service.BaseService;
 import org.apache.log4j.Logger;
-
+import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class UserService extends BaseService<UserRepository, User, Long> {
@@ -73,5 +75,31 @@ public class UserService extends BaseService<UserRepository, User, Long> {
                 return user;
             return null;
         }
+    }
+
+    public List<User> search(UserSearch userSearch){
+        String queryStr = buildQuery(userSearch);
+        HashMap<String,Object> params = buildParams(userSearch);
+        Query query = userRepository.buildQueryHasParameters(queryStr,false,params);
+        List<User> users = query.getResultList();
+        return users;
+    }
+
+    private HashMap<String,Object> buildParams(UserSearch userSearch){
+        HashMap<String,Object> params = new HashMap<>();
+        if (!userSearch.getEmail().isEmpty())
+            params.put("email",userSearch.getEmail());
+        if (!userSearch.getUserName().isEmpty())
+            params.put("email",userSearch.getUserName());
+        return params;
+    }
+
+    private String buildQuery(UserSearch userSearch){
+        String query = " from User u where 1=1 ";
+        if (!userSearch.getEmail().isEmpty())
+            query += "and u.email = :email";
+        if (!userSearch.getUserName().isEmpty())
+            query += "and u.userName = :userName";
+        return query;
     }
 }

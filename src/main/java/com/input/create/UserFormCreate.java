@@ -1,14 +1,19 @@
 package com.input.create;
 
 import com.validator.Password;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class UserFormCreate {
 
+    @NotBlank(message = "userName not empty")
     private String userName;
+    @NotBlank(message = "email not empty")
     private String email;
     private String name;
+    @NotBlank(message = "password not empty")
     @Password
     private String password;
+    @NotBlank(message = "confirm password not empty")
     private String confirmPassword;
 
     public String getUserName() {
