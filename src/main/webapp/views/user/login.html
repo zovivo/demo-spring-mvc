@@ -11,14 +11,14 @@
                   th:object="${userFormLogin}">
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" th:text="|#{userName} / #{email}|">Username / Email</label>
+                    <label class="col-sm-6 control-label" th:text="|#{userName} / #{email}|">Username / Email</label>
                     <div class="col-sm-10">
                         <input type="text" th:field="*{userName}" class="form-control" th:placeholder="#{userName}"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" th:text="#{password}">Password</label>
+                    <label class="col-sm-6 control-label" th:text="#{password}">Password</label>
                     <div class="col-sm-10">
                         <input type="password" th:field="*{password}" class="form-control"
                                th:placeholder="#{password}"/>
