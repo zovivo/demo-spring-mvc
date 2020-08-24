@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"","/", "/list"})
+    @RequestMapping(value = {"", "/", "/list"})
     public ModelAndView list() {
         logger.info("list user page");
         ModelAndView model = new ModelAndView("list");
@@ -90,7 +90,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update-user", method = RequestMethod.POST)
-    public String update(@ModelAttribute UserFormUpdate userFormUpdate) {
+    public String update(@ModelAttribute("userFormUpdate") @Valid UserFormUpdate userFormUpdate, BindingResult result) {
+        if (result.hasErrors()) {
+            return "user-edit";
+        }
         userService.update(userFormUpdate);
         return "redirect:/user/list";
     }
