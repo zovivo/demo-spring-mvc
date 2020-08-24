@@ -14,24 +14,26 @@
             </button>
             <strong><span th:text="${msg}"></span></strong>
         </div>
-        <div class="row md-col-8">
-            <h2 th:text="#{search}">Search</h2>
+        <div class=" md-col-12">
+            <h2 th:text="#{search}">Search &nbsp;&nbsp;</h2>
+            <div>
+            </div>
             <form th:action="@{/search} " th:object="${userSearch}"
                   class="form-horizontal">
 
                 <table>
                     <tr>
-                        <th th:text="#{name}">Name&nbsp;&nbsp;</th>
+                        <th style="padding: 0 10px;" th:text="#{name}">Name  &nbsp;&nbsp;</th>
                         <td><input type="text" th:field="*{userName}" path="userName"
                                    class="form-control"/>
-                        <th style="padding-left: 28px;" th:text="#{email}">Email&nbsp;&nbsp;</th>
+                                   </td>
+                        <th style="padding: 0 10px;" th:text="#{email}">Email  &nbsp;&nbsp;</th>
                         <td>
-                            <form:input path="email" class="form-control"/>
-                            <form:errors
-                                    path="email" class="error"/>
+                            <input type="text" path="email" class="form-control"/>
+                            <li th:errors="*{email}" class="error"/>
                         </td>
                         <td style="padding-left: 28px;">
-                            <button type="submit" th:text="#{search}">Search</button>
+                            <button type="submit" th:text="#{search}" class="btn btn-primary">Search</button>
                         </td>
                     </tr>
                 </table>
@@ -52,12 +54,11 @@
                             <th scope="col" th:text="#{email}">Email</th>
                             <th scope="col" th:text="#{userName}">Username</th>
                             <th scope="col" th:text="#{action}">Action</th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <th:block th:each="user,iter : ${users}">
-                            <tr th:style="${iter.odd}? 'background-color: #ccc;'">
+                            <tr th:style="${iter.odd}? 'background-color: #ccc; color: #000;'">
                                 <th scope="row" th:text="${iter.index + 1}"></th>
                                 <td th:text="${user.name}"></td>
                                 <td th:text="${user.email}"></td>
