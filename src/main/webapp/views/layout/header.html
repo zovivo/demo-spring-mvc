@@ -17,19 +17,25 @@
 
                     <div class="col-6">
                         <div class="top-header-content">
-                            <a th:href="@{#}"><i class="icon_phone"></i> <span>(123) 456-789-1230</span></a>
-                            <a th:href="@{#}"><i class="icon_mail"></i> <span>info.colorlib@gmail.com</span></a>
+                            <a th:href="@{'/login'}" th:text="#{signIn}">Sign in</a>
+                            <a th:href="@{'/user/add'}" th:text="#{signUp}">Sign up</a>
                         </div>
                     </div>
 
                     <div class="col-6">
                         <div class="top-header-content">
                             <!-- Top Social Area -->
-                            <div class="top-social-area ml-auto">
+                            <!-- <div class="top-social-area ml-auto">
                                 <a th:href="@{#}"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 <a th:href="@{#}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                 <a th:href="@{#}"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
                                 <a th:href="@{#}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            Top Social Area -->
+                            <div class="top-social-area ml-auto">
+                                <a th:href="@{?lang=en}"><img alt="EN" width="34"
+                                                              th:src="@{https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/259/flag-united-states_1f1fa-1f1f8.png}"/></a>
+                                <a th:href="@{?lang=vi}"><img alt="VI" width="34"
+                                                              th:src="@{https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/259/flag-vietnam_1f1fb-1f1f3.png}"/></a>
                             </div>
                         </div>
                     </div>
@@ -108,4 +114,3 @@
     </header>
     <!-- Header Area End -->
 </div>
-
